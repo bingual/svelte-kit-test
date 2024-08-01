@@ -1,0 +1,12 @@
+{
+	"arrowParens": "always",
+	"orderedImports": true,
+	"printWidth": 100,
+	"singleQuote": true,
+	"semi": true,
+	"tabWidth": 2,
+	"trailingComma": "all",
+	"useTabs": false,
+	"plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
+}
