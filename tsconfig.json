@@ -3,8 +3,8 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -14,7 +14,8 @@
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "verbatimModuleSyntax": false,
     "moduleResolution": "bundler"
   },
   "include": ["**/*.ts", "**/*.tsx"],
