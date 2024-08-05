@@ -4,6 +4,7 @@
   import { Alert } from 'flowbite-svelte';
   import { goto } from '$app/navigation';
 
+  export let title = '메모 작성';
   export let form: ActionData;
   $: {
     if (form?.success) {
@@ -11,6 +12,10 @@
     }
   }
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 
 <div class="container">
   {#if form?.error}

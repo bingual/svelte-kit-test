@@ -1,6 +1,11 @@
 <script>
   import { Alert } from 'flowbite-svelte';
+  export let title = 'Adora';
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 
 <div class="p-8">
   <Alert>

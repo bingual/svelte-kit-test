@@ -121,8 +121,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+#lib/
+#lib64/
 parts/
 sdist/
 var/
@@ -311,3 +311,4 @@ vite.config.ts.timestamp-*
 # test
 src/test/
 src/app/test/
+.vercel

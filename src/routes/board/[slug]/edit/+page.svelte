@@ -11,7 +11,13 @@
       goto(`/board/${data.slug}`);
     }
   }
+
+  export let title = `메모 수정: ${data.slug}번 째 메모`;
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 
 <div class="container">
   {#if form?.error}

@@ -3,10 +3,15 @@
   import { goto } from '$app/navigation';
   import { CirclePlusOutline } from 'flowbite-svelte-icons';
 
+  export let title = '메모 목록';
   export let data;
 
   const boardList = data.boardMany ?? [];
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 
 <div class="container">
   {#if boardList.length > 0}
