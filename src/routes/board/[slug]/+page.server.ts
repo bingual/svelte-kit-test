@@ -1,8 +1,8 @@
 import db from '@/lib/utils/db';
-import { PageServerLoad } from '../$types';
-import { Actions, fail, RequestEvent } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
+import { fail, RequestEvent } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }: { params: any }) => {
+export const load: PageServerLoad = async ({ params }) => {
   try {
     const { slug } = params;
 
@@ -22,12 +22,14 @@ export const load: PageServerLoad = async ({ params }: { params: any }) => {
 };
 
 export const actions: Actions = {
-  delete: async (event: RequestEvent) => {
+  delete: async ({ request }: RequestEvent) => {
     try {
-      const { slug } = event.params;
+      const formData = await request.formData();
+      const idx = formData.get('idx');
+
       const res = await db.board.delete({
         where: {
-          idx: Number(slug),
+          idx: Number(idx),
         },
       });
 
@@ -43,7 +45,10 @@ export const actions: Actions = {
         };
       }
     } catch (error) {
-      return fail(500, { success: false, message: error });
+      return fail(500, {
+        success: false,
+        message: error instanceof Error ? error.message : String(error),
+      });
     }
   },
 };

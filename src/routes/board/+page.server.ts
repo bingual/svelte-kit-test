@@ -14,6 +14,9 @@ export const load: PageServerLoad = async () => {
       boardMany,
     };
   } catch (error) {
-    return fail(500, { success: false, message: error });
+    return fail(500, {
+      success: false,
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
 };

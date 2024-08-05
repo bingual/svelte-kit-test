@@ -5,9 +5,9 @@ import db from '@/lib/utils/db';
 import { boradFormSchema } from '@/lib/utils/schema';
 
 export const actions: Actions = {
-  default: async (event: RequestEvent) => {
+  default: async ({ request }: RequestEvent) => {
     try {
-      const formData = Object.fromEntries(await event.request.formData());
+      const formData = Object.fromEntries(await request.formData());
       const boradFormData = boradFormSchema.safeParse(formData);
 
       if (!boradFormData.success) {
@@ -41,7 +41,10 @@ export const actions: Actions = {
         }
       }
     } catch (error) {
-      return fail(500, { success: false, message: error });
+      return fail(500, {
+        success: false,
+        message: error instanceof Error ? error.message : String(error),
+      });
     }
   },
 };

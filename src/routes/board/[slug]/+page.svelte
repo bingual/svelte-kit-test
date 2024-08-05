@@ -14,12 +14,6 @@
   }
 
   const boardDetail = data?.boardFirst;
-
-  const handleDelete = (event: Event) => {
-    if (!confirm('정말로 이 글을 삭제하시겠습니까?')) {
-      event.preventDefault();
-    }
-  };
 </script>
 
 <div class="container">
@@ -35,7 +29,18 @@
 
     <article>
       <div class="flex justify-end">
-        <form use:enhance action={`?/delete`} method="POST" on:submit={handleDelete}>
+        <form
+          use:enhance
+          action="?/delete"
+          use:enhance={({ formData, cancel }) => {
+            if (!confirm('메모를 정말로 삭제하시겠습니까?')) {
+              cancel();
+            } else {
+              formData.append('idx', String(boardDetail?.idx));
+            }
+          }}
+          method="POST"
+        >
           <button class="me-1 cursor-pointer" type="submit">
             <TrashBinOutline size="xl" />
           </button>

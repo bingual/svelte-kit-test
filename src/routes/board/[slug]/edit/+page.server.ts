@@ -1,6 +1,6 @@
 import type { Actions, PageServerLoad } from './$types';
 import type { RequestEvent } from '@sveltejs/kit';
-import { error, fail } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import db from '@/lib/utils/db';
 import { boradFormSchema } from '@/lib/utils/schema';
 
@@ -18,18 +18,18 @@ export const load: PageServerLoad = async ({ params }) => {
       slug,
       BoardFirst,
     };
-  } catch {
-    error;
-  }
-  {
-    return fail(500, { success: false, message: error });
+  } catch (error) {
+    return fail(500, {
+      success: false,
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
 };
 
 export const actions: Actions = {
-  default: async (event: RequestEvent) => {
+  default: async ({ request, params }: RequestEvent) => {
     try {
-      const formData = Object.fromEntries(await event.request.formData());
+      const formData = Object.fromEntries(await request.formData());
       const boradFormData = boradFormSchema.safeParse(formData);
 
       if (!boradFormData.success) {
@@ -42,7 +42,7 @@ export const actions: Actions = {
 
         return fail(400, { error: true, errors });
       } else {
-        const { slug } = event.params;
+        const { slug } = params;
         const { title, content } = boradFormData.data;
 
         const res = await db.board.update({
@@ -67,7 +67,10 @@ export const actions: Actions = {
         }
       }
     } catch (error) {
-      return fail(500, { success: false, message: error });
+      return fail(500, {
+        success: false,
+        message: error instanceof Error ? error.message : String(error),
+      });
     }
   },
 };
