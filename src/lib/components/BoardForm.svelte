@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Input, Textarea } from 'flowbite-svelte';
+  import { Button, Fileupload, Input, Textarea } from 'flowbite-svelte';
   import { goto } from '$app/navigation';
   import { enhance } from '$app/forms';
 
@@ -24,16 +24,17 @@
       name="title"
       placeholder="제목을 입력하세요."
       value={boardData && boardData?.title}
+      required
     />
   </div>
 
   <div class="mb-2">
-    <Textarea {...textareaprops} value={boardData && boardData?.content} />
+    <Textarea {...textareaprops} value={boardData && boardData?.content} required />
   </div>
 
-  <!--  <div class="mb-5">-->
-  <!--    <Fileupload name="photo" />-->
-  <!--  </div>-->
+  <div class="mb-5">
+    <Fileupload name="photo" accept=".jpg, .jpeg, .png" required />
+  </div>
 
   <div class="flex justify-end">
     <Button

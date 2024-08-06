@@ -14,15 +14,15 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="container">
+<div class="container mx-auto p-4">
   <div class="mb-5">
     <SearchBar />
   </div>
 
   {#if boardList.length > 0}
-    <div class="flex flex-col space-y-4">
+    <div class="grid grid-cols-4 gap-4">
       {#each boardList as board}
-        <Card class="max-w-full" href={`/board/${board.idx}`}>
+        <Card img={board?.photo ? `/${board?.photo}` : ''} href={`/board/${board.idx}`} size="sm">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {board?.title}
           </h5>
@@ -34,7 +34,7 @@
     </div>
   {/if}
 
-  <div class="fixed bottom-20 right-1/2">
+  <div class="fixed bottom-10 right-20">
     <button
       on:click={() => {
         goto('/board/write');

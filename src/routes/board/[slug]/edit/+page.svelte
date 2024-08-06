@@ -19,7 +19,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="container">
+<div class="container mx-auto p-4">
   {#if form?.error}
     <Alert class="mb-3">
       {#each form.errors as error}

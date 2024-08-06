@@ -2,7 +2,7 @@ import type { Actions, PageServerLoad } from './$types';
 import type { RequestEvent } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import db from '@/lib/utils/db';
-import { boradFormSchema } from '@/lib/utils/schema';
+import { boardFormSchema } from '@/lib/utils/schema';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
@@ -30,7 +30,7 @@ export const actions: Actions = {
   default: async ({ request, params }: RequestEvent) => {
     try {
       const formData = Object.fromEntries(await request.formData());
-      const boradFormData = boradFormSchema.safeParse(formData);
+      const boradFormData = boardFormSchema.safeParse(formData);
 
       if (!boradFormData.success) {
         const errors = boradFormData.error.errors.map((error) => {
