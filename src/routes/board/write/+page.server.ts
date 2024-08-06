@@ -8,10 +8,10 @@ export const actions: Actions = {
   default: async ({ request }: RequestEvent) => {
     try {
       const formData = Object.fromEntries(await request.formData());
-      const boradFormData = boradFormSchema.safeParse(formData);
+      const boardFormData = boradFormSchema.safeParse(formData);
 
-      if (!boradFormData.success) {
-        const errors = boradFormData.error.errors.map((error) => {
+      if (!boardFormData.success) {
+        const errors = boardFormData.error.errors.map((error) => {
           return {
             field: error.path[0],
             message: error.message,
@@ -20,7 +20,7 @@ export const actions: Actions = {
 
         return fail(400, { error: true, errors });
       } else {
-        const { title, content } = boradFormData.data;
+        const { title, content } = boardFormData.data;
 
         const res = await db.board.create({
           data: {

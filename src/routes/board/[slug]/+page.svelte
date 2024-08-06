@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div class="container">
-  <Card class="mx-auto" size="xl" padding="md">
+  <Card class="max-w-full">
     <div class="container">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {boardDetail?.title}

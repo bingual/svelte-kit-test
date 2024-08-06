@@ -2,7 +2,7 @@
   import { Card } from 'flowbite-svelte';
   import { goto } from '$app/navigation';
   import { CirclePlusOutline } from 'flowbite-svelte-icons';
-  import SearchForm from '@/lib/components/Search.svelte';
+  import SearchBar from '$lib/components/SearchBar.svelte';
 
   export let title = '메모 목록';
   export let data;
@@ -16,31 +16,31 @@
 
 <div class="container">
   <div class="mb-5">
-    <SearchForm />
+    <SearchBar />
   </div>
 
   {#if boardList.length > 0}
-    <div class="flex flex-col">
+    <div class="flex flex-col space-y-4">
       {#each boardList as board}
-        <Card href={`/board/${board.idx}`} class="mx-auto mb-5" size="xl" padding="md">
+        <Card class="max-w-full" href={`/board/${board.idx}`}>
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {board.title}
+            {board?.title}
           </h5>
-          <p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
-            {board.content}
+          <p class="mb-3 font-normal leading-tight text-gray-700 dark:text-gray-400">
+            {board?.content}
           </p>
         </Card>
       {/each}
     </div>
   {/if}
 
-  <div class="flex justify-end">
+  <div class="fixed bottom-20 right-1/2">
     <button
       on:click={() => {
         goto('/board/write');
       }}
     >
-      <CirclePlusOutline class="text-green-500" size="xl" />
+      <CirclePlusOutline class="h-14 w-14 text-green-500" />
     </button>
   </div>
 </div>

@@ -17,7 +17,7 @@
   export let redirectUrl;
 </script>
 
-<form use:enhance method="POST">
+<form use:enhance method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <Input
       id="title"
@@ -27,9 +27,13 @@
     />
   </div>
 
-  <div>
+  <div class="mb-2">
     <Textarea {...textareaprops} value={boardData && boardData?.content} />
   </div>
+
+  <!--  <div class="mb-5">-->
+  <!--    <Fileupload name="photo" />-->
+  <!--  </div>-->
 
   <div class="flex justify-end">
     <Button
