@@ -3,11 +3,10 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import db from '@/lib/utils/db';
 import { boardFormSchema } from '@/lib/utils/schema';
-import { existsSync, mkdirSync } from 'node:fs';
+import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment-timezone';
-import sharp from 'sharp';
 
 export const actions: Actions = {
   default: async ({ request }: RequestEvent) => {
@@ -43,12 +42,16 @@ export const actions: Actions = {
             mkdirSync(dirPath, { recursive: true });
           }
 
-          photoName = `${filePath}/${fileName}`;
-
           const imageBuffer = Buffer.from(await photo.arrayBuffer());
-          await sharp(imageBuffer)
-            .resize(512, 512) // 원하는 크기로 조절
-            .toFile(fullFilePath);
+
+          //   await sharp(imageBuffer)
+          //     .resize(512, 512) // 원하는 크기로 조절
+          //     .toFile(fullFilePath);
+          // }
+
+          writeFileSync(fullFilePath, imageBuffer);
+
+          photoName = `${filePath}/${fileName}`;
         }
 
         const res = await db.board.create({
