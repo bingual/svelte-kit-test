@@ -10,5 +10,6 @@
   <NavUl>
     <NavLi href="/" active={true}>홈</NavLi>
     <NavLi href="/board">메모</NavLi>
+    <NavLi href="/learning">학습</NavLi>
   </NavUl>
 </Navbar>

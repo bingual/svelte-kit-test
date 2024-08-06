@@ -12,8 +12,9 @@
     "isolatedModules": true,
     "incremental": true,
     "noEmit": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "downlevelIteration": true,
     "verbatimModuleSyntax": false,
     "moduleResolution": "bundler"
